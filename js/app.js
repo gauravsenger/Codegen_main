@@ -1936,7 +1936,7 @@
             // Predefined template values
             const templateData = {
                 amount: '15000',
-                productinfo: 'DESKTOP',
+                productinfo: 'IntegrationLab',
                 firstname: 'Sunit',
                 lastname: 'Kumar',
                 email: 'sunit.kumar@mail.com',
