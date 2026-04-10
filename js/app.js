@@ -7426,4 +7426,3 @@ nodeCartDetailsUsage +
         window.submitPayment = submitPayment;
         window.launchCheckoutPlus = launchCheckoutPlus;
         window.resetFormFields = resetFormFields;
-
