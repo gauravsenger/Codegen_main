@@ -59,6 +59,102 @@
             }
         }
         
+        /*
+         * INTEGRATION STEPS PROGRESS TRACKER
+         * ==================================
+         * Tracks and updates the visual progress of integration steps
+         */
+        const stepsProgress = {
+            'crossborder': { currentStep: 1, completedSteps: [] },
+            'nonseamless': { currentStep: 1, completedSteps: [] },
+            'subscription': { currentStep: 1, completedSteps: [] },
+            'tpv': { currentStep: 1, completedSteps: [] },
+            'upiotm': { currentStep: 1, completedSteps: [] },
+            'preauth': { currentStep: 1, completedSteps: [] },
+            'checkoutplus': { currentStep: 1, completedSteps: [] },
+            'split': { currentStep: 1, completedSteps: [] },
+            'bankoffer': { currentStep: 1, completedSteps: [] }
+        };
+        
+        function getStepPrefix(flow) {
+            const prefixMap = {
+                'crossborder': 'cb',
+                'nonseamless': 'ns',
+                'subscription': 'sub',
+                'tpv': 'tpv',
+                'upiotm': 'upi',
+                'preauth': 'preauth',
+                'checkoutplus': 'cp',
+                'split': 'split',
+                'bankoffer': 'bo'
+            };
+            return prefixMap[flow] || flow;
+        }
+        
+        function updateStepProgress(flow, stepNumber, action) {
+            if (!stepsProgress[flow]) return;
+            
+            const prefix = getStepPrefix(flow);
+            const stepsContainer = document.getElementById(prefix + '-steps-container');
+            if (!stepsContainer) return;
+            
+            const progress = stepsProgress[flow];
+            
+            if (action === 'complete') {
+                if (!progress.completedSteps.includes(stepNumber)) {
+                    progress.completedSteps.push(stepNumber);
+                }
+                
+                const stepElement = document.getElementById(prefix + '-step-' + stepNumber);
+                if (stepElement) {
+                    stepElement.classList.remove('active');
+                    stepElement.classList.add('completed');
+                }
+                
+                const nextStep = stepNumber + 1;
+                if (nextStep <= 3) {
+                    const nextStepElement = document.getElementById(prefix + '-step-' + nextStep);
+                    if (nextStepElement && !progress.completedSteps.includes(nextStep)) {
+                        nextStepElement.classList.add('active');
+                        progress.currentStep = nextStep;
+                    }
+                }
+                
+                console.log('✅ Step ' + stepNumber + ' completed for ' + flow + '. Current step: ' + progress.currentStep);
+            } else if (action === 'activate') {
+                const steps = stepsContainer.querySelectorAll('.step-item');
+                steps.forEach(step => {
+                    const sNum = parseInt(step.dataset.step);
+                    if (sNum === stepNumber && !progress.completedSteps.includes(sNum)) {
+                        step.classList.add('active');
+                    } else if (!progress.completedSteps.includes(sNum)) {
+                        step.classList.remove('active');
+                    }
+                });
+                progress.currentStep = stepNumber;
+            }
+        }
+        
+        function resetStepsProgress(flow) {
+            if (!stepsProgress[flow]) return;
+            
+            const prefix = getStepPrefix(flow);
+            const stepsContainer = document.getElementById(prefix + '-steps-container');
+            if (!stepsContainer) return;
+            
+            stepsProgress[flow] = { currentStep: 1, completedSteps: [] };
+            
+            const steps = stepsContainer.querySelectorAll('.step-item');
+            steps.forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index === 0) {
+                    step.classList.add('active');
+                }
+            });
+            
+            console.log('🔄 Steps progress reset for ' + flow);
+        }
+        
         // Default Callback URLs - Dynamically generated based on current domain and path
         // Works on localhost, Render.com, or when app is under a subpath (e.g. payu.in/integrationlab)
         const getBasePath = () => {
@@ -1751,6 +1847,9 @@
             }
             console.log('✓ Flow saved to localStorage:', selectedFlow);
             
+            // Reset integration steps progress for the flow
+            resetStepsProgress(selectedFlow);
+            
             if (flowSelect) {
                 flowSelect.value = selectedFlow;
             }
@@ -2015,6 +2114,9 @@
                 event_category: 'Tools',
                 event_label: 'Fill Sample Data - ' + (flowDisplayNames[flow] || flow)
             });
+            
+            // Update step progress - Step 1 completed (Create Payload)
+            updateStepProgress(flow, 1, 'complete');
             
             console.log('✓ Template data filled for ' + flow + ' flow');
         }
@@ -3532,6 +3634,11 @@
                 form.appendChild(input);
             });
             
+            // Update step progress - Step 3 completed (Post Request)
+            updateStepProgress(flow, 1, 'complete');
+            updateStepProgress(flow, 2, 'complete');
+            updateStepProgress(flow, 3, 'complete');
+            
             // Submit form
             document.body.appendChild(form);
             form.submit();
@@ -3815,6 +3922,10 @@
             document.getElementById(prefix + '-debugContent').innerHTML = debugHtml;
             document.getElementById(prefix + '-debugSection').style.display = 'block';
             document.getElementById(prefix + '-debugSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // Update step progress - Step 2 completed (Generate Hash)
+            updateStepProgress(flow, 1, 'complete');
+            updateStepProgress(flow, 2, 'complete');
         }
         
         // Show CURL Command
@@ -4103,6 +4214,11 @@
                     checkoutPlusCatchException(BOLT);
                 }
             };
+            
+            // Update step progress - Step 3 completed (Post Request)
+            updateStepProgress('checkoutplus', 1, 'complete');
+            updateStepProgress('checkoutplus', 2, 'complete');
+            updateStepProgress('checkoutplus', 3, 'complete');
             
             // Launch payment
             try {
@@ -7310,3 +7426,4 @@ nodeCartDetailsUsage +
         window.submitPayment = submitPayment;
         window.launchCheckoutPlus = launchCheckoutPlus;
         window.resetFormFields = resetFormFields;
+
