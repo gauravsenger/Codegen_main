@@ -47,7 +47,7 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script id="checkoutPlusScript" src="https://jssdk-uat.payu.in/bolt/bolt.min.js"></script>
-    <link rel="stylesheet" href="<?php echo $assetBase === '' ? 'css/styles.css' : htmlspecialchars($assetBase) . '/css/styles.css'; ?>">
+    <link rel="stylesheet" href="<?php echo $assetBase === '' ? 'css/styles.css?v=2.1' : htmlspecialchars($assetBase) . '/css/styles.css?v=2.1'; ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- LRS/UDF toggles: work before app.js; delegated listener so LRS/UDF always respond to checkbox -->
     <script>
@@ -3632,6 +3632,6 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
             </div>
         </div>
     </div>
-    <script src="<?php echo $assetBase === '' ? 'js/app.js' : htmlspecialchars($assetBase) . '/js/app.js'; ?>"></script>
+<script src="<?php echo $assetBase === '' ? 'js/app.js?v=2.1' : htmlspecialchars($assetBase) . '/js/app.js?v=2.1'; ?>"></script>
 </body>
 </html>
