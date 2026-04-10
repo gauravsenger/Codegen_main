@@ -244,6 +244,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
                 <h2>PayU Hosted Cross Border Payment</h2>
             </div>
             
+            <!-- Integration Steps Guide -->
+            <div class="integration-steps-guide" id="cb-steps-guide">
+                <div class="steps-guide-header">
+                    <i class="fas fa-route"></i>
+                    <span>Follow these steps to test your integration:</span>
+                </div>
+                <div class="steps-container" id="cb-steps-container">
+                    <div class="step-item active" data-step="1" id="cb-step-1">
+                        <div class="step-number"><span>1</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Create Payload</div>
+                            <div class="step-description">Fill form data or use sample data</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="2" id="cb-step-2">
+                        <div class="step-number"><span>2</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Generate Hash</div>
+                            <div class="step-description">Use Show Debug Info to verify</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="3" id="cb-step-3">
+                        <div class="step-number"><span>3</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Post Request</div>
+                            <div class="step-description">Use Pay Now to test journey</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="main-content">
                 <!-- Configuration Settings -->
                 <div class="section">
@@ -758,6 +791,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
                 <h2>PayU Hosted Checkout</h2>
             </div>
             
+            <!-- Integration Steps Guide -->
+            <div class="integration-steps-guide" id="ns-steps-guide">
+                <div class="steps-guide-header">
+                    <i class="fas fa-route"></i>
+                    <span>Follow these steps to test your integration:</span>
+                </div>
+                <div class="steps-container" id="ns-steps-container">
+                    <div class="step-item active" data-step="1" id="ns-step-1">
+                        <div class="step-number"><span>1</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Create Payload</div>
+                            <div class="step-description">Fill form data or use sample data</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="2" id="ns-step-2">
+                        <div class="step-number"><span>2</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Generate Hash</div>
+                            <div class="step-description">Use Show Debug Info to verify</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="3" id="ns-step-3">
+                        <div class="step-number"><span>3</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Post Request</div>
+                            <div class="step-description">Use Pay Now to test journey</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="main-content">
                 <!-- Configuration Settings -->
                 <div class="section">
@@ -1031,6 +1097,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
         <div class="flow-content" id="subscriptionFlow">
             <div class="flow-title">
                 <h2>PayU Hosted Checkout Subscription</h2>
+            </div>
+            
+            <!-- Integration Steps Guide -->
+            <div class="integration-steps-guide" id="sub-steps-guide">
+                <div class="steps-guide-header">
+                    <i class="fas fa-route"></i>
+                    <span>Follow these steps to test your integration:</span>
+                </div>
+                <div class="steps-container" id="sub-steps-container">
+                    <div class="step-item active" data-step="1" id="sub-step-1">
+                        <div class="step-number"><span>1</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Create Payload</div>
+                            <div class="step-description">Fill form data or use sample data</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="2" id="sub-step-2">
+                        <div class="step-number"><span>2</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Generate Hash</div>
+                            <div class="step-description">Use Show Debug Info to verify</div>
+                        </div>
+                        <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                    </div>
+                    <div class="step-item" data-step="3" id="sub-step-3">
+                        <div class="step-number"><span>3</span></div>
+                        <div class="step-content">
+                            <div class="step-title">Post Request</div>
+                            <div class="step-description">Use Pay Now to test journey</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="main-content">
@@ -1430,6 +1529,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
             <h2>PayU Hosted Checkout TPV</h2>
         </div>
         
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="tpv-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="tpv-steps-container">
+                <div class="step-item active" data-step="1" id="tpv-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="tpv-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="tpv-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="main-content">
             <!-- Configuration Settings -->
             <div class="section">
@@ -1722,6 +1854,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
             <h2>PayU Hosted Checkout UPI OTM</h2>
         </div>
         
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="upi-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="upi-steps-container">
+                <div class="step-item active" data-step="1" id="upi-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="upi-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="upi-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="main-content">
             <!-- Configuration Settings -->
             <div class="section">
@@ -1992,6 +2157,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
     <div class="flow-content" id="preauthFlow">
         <div class="flow-title">
             <h2>PayU Hosted Checkout PreAuth</h2>
+        </div>
+        
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="preauth-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="preauth-steps-container">
+                <div class="step-item active" data-step="1" id="preauth-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="preauth-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="preauth-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="main-content">
@@ -2272,6 +2470,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
             <h2>Checkout Plus</h2>
         </div>
         
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="cp-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="cp-steps-container">
+                <div class="step-item active" data-step="1" id="cp-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="cp-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="cp-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="main-content">
             <!-- Configuration Settings -->
             <div class="section">
@@ -2529,6 +2760,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
     <div class="flow-content" id="splitFlow">
         <div class="flow-title">
             <h2>PayU Hosted Checkout Split Payment</h2>
+        </div>
+        
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="split-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="split-steps-container">
+                <div class="step-item active" data-step="1" id="split-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="split-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="split-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="main-content">
@@ -2846,6 +3110,39 @@ $assetBase = $isPayuIntegrationLab ? $basePath : '';
     <div class="flow-content" id="bankofferFlow">
         <div class="flow-title">
             <h2>PayU Hosted Checkout Bank Offers</h2>
+        </div>
+        
+        <!-- Integration Steps Guide -->
+        <div class="integration-steps-guide" id="bo-steps-guide">
+            <div class="steps-guide-header">
+                <i class="fas fa-route"></i>
+                <span>Follow these steps to test your integration:</span>
+            </div>
+            <div class="steps-container" id="bo-steps-container">
+                <div class="step-item active" data-step="1" id="bo-step-1">
+                    <div class="step-number"><span>1</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Create Payload</div>
+                        <div class="step-description">Fill form data or use sample data</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="2" id="bo-step-2">
+                    <div class="step-number"><span>2</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Generate Hash</div>
+                        <div class="step-description">Use Show Debug Info to verify</div>
+                    </div>
+                    <span class="step-arrow"><i class="fas fa-chevron-right"></i></span>
+                </div>
+                <div class="step-item" data-step="3" id="bo-step-3">
+                    <div class="step-number"><span>3</span></div>
+                    <div class="step-content">
+                        <div class="step-title">Post Request</div>
+                        <div class="step-description">Use Pay Now to test journey</div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <div class="main-content">
