@@ -2034,7 +2034,7 @@
             
             // Predefined template values
             const templateData = {
-                amount: '15000',
+                amount: '17000',
                 productinfo: 'IntegrationLab',
                 firstname: 'Sunit',
                 lastname: 'Kumar',
