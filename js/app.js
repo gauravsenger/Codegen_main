@@ -5,7 +5,8 @@
         const DEFAULT_SALT = 'mGHSxpD2iBVywParGQrGBlaXjnwkGJMQ';
 
         function getProxyUrl() {
-            return window.location.origin + '/proxy.php';
+            var path = window.location.pathname.replace(/\/[^/]*$/, '');
+            return window.location.origin + path + '/proxy.php';
         }
         window.getProxyUrl = getProxyUrl;
 
@@ -11941,7 +11942,7 @@ nodeCartDetailsUsage +
 
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            fetchWithRetry('/proxy.php', {
+            fetchWithRetry(getProxyUrl(), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -12192,7 +12193,7 @@ nodeCartDetailsUsage +
 
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            fetchWithRetry('/proxy.php', {
+            fetchWithRetry(getProxyUrl(), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -12560,7 +12561,7 @@ nodeCartDetailsUsage +
             document.getElementById('smOtmResponseView').textContent = 'Waiting for response...';
             document.getElementById('smOtmCurlView').textContent = smBuildCurl(data.params, 'payment');
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetch('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'payment', params: data.params }) })
+            fetch(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'payment', params: data.params }) })
                 .then(function(r) { return r.json(); })
                 .then(function(result) { smDisplayOtmResponse(result, data); })
                 .catch(function(err) {
@@ -12860,7 +12861,7 @@ nodeCartDetailsUsage +
             var curl = 'curl --location \\\n  "https://apitest.payu.in/v1/transaction/upi_otm_status_check?payuId=' + data.hmacInfo.payuid + '" \\\n  --header "date: ' + data.hmacInfo.date + '" \\\n  --header "digest: ' + data.hmacInfo.digest + '" \\\n  --header \'Authorization: ' + data.hmacInfo.auth + '\'';
             document.getElementById('smHmacCurlView').textContent = curl;
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', {
+            fetchWithRetry(getProxyUrl(), {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ endpoint: 'otm_status', method: 'GET', params: data.params, headers: data.headers })
             }).then(function(result) {
@@ -13597,7 +13598,7 @@ nodeCartDetailsUsage +
             document.getElementById('sm' + prefix + 'ResponseView').textContent = 'Waiting for response...';
             document.getElementById('sm' + prefix + 'CurlView').textContent = smBuildCurl(data.params, endpoint);
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', {
+            fetchWithRetry(getProxyUrl(), {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ endpoint: endpoint, params: data.params })
             }).then(function(result) {
@@ -14158,7 +14159,7 @@ nodeCartDetailsUsage +
             badge.innerHTML='<span class="sm-loading-spinner"></span> Sending to PayU Test...';
             document.getElementById('smSimResponseView').textContent='Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
             .then(function(result){smGenericDisplay('Sim',result);})
             .catch(function(err){badge.className='sm-status-badge error';badge.textContent='Failed';document.getElementById('smSimResponseView').textContent='Error: '+err.message;});
         }
@@ -14899,7 +14900,7 @@ nodeCartDetailsUsage +
             if (respView) respView.textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             var displayPrefix = panelId.replace('ReqRes','');
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay(displayPrefix, result); smRenderBinSummary(panelId, result); })
                 .catch(function(err) { if (badge) { badge.className = 'sm-status-badge error'; badge.textContent = 'Failed'; } if (respView) respView.textContent = 'Error: ' + err.message; });
@@ -14954,7 +14955,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending...';
             document.getElementById('scDomesticResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scDomestic', result); })
                 .catch(function(err) { document.getElementById('scDomesticStatusBadge').className = 'sm-status-badge error'; document.getElementById('scDomesticStatusBadge').textContent = 'Failed'; document.getElementById('scDomesticResponseView').textContent = 'Error: ' + err.message; });
@@ -15186,7 +15187,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending to PayU...';
             document.getElementById(elPrefix + 'ResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'payment', params: data.params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'payment', params: data.params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay(elPrefix, result);
@@ -15668,7 +15669,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Submitting OTP...';
             document.getElementById(elPrefix + 'ResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'response_handler', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'response_handler', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay(elPrefix, result); })
                 .catch(function(err) { document.getElementById(elPrefix + 'StatusBadge').className = 'sm-status-badge error'; document.getElementById(elPrefix + 'StatusBadge').textContent = 'Failed'; document.getElementById(elPrefix + 'ResponseView').textContent = 'Error: ' + err.message; });
@@ -15679,7 +15680,7 @@ nodeCartDetailsUsage +
             var refId = document.getElementById(refField).value.trim();
             if (!refId) { alert('Fill Reference ID'); return; }
             var params = { referenceId: refId, resendOtp: '1', data: '{"payuPureS2S":"1"}' };
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'response_handler', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'response_handler', params: params }) })
     
                 .then(function(result) { alert('Resend OTP Response: ' + JSON.stringify(result.response || result)); })
                 .catch(function(err) { alert('Error: ' + err.message); });
@@ -15709,7 +15710,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Verifying...';
             document.getElementById(elPrefix + 'ResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay(elPrefix, result);
@@ -15777,7 +15778,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Capturing...';
             document.getElementById('scCapResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scCap', result); })
                 .catch(function(err) { document.getElementById('scCapStatusBadge').className = 'sm-status-badge error'; document.getElementById('scCapStatusBadge').textContent = 'Failed'; document.getElementById('scCapResponseView').textContent = 'Error: ' + err.message; });
@@ -15850,7 +15851,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Cancelling...';
             document.getElementById('scPaCancelResponseView').textContent = 'Waiting...';
 
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scPaCancel', result); })
                 .catch(function(err) { document.getElementById('scPaCancelStatusBadge').className = 'sm-status-badge error'; document.getElementById('scPaCancelStatusBadge').textContent = 'Failed'; document.getElementById('scPaCancelResponseView').textContent = 'Error: ' + err.message; });
@@ -15931,7 +15932,7 @@ nodeCartDetailsUsage +
             var maxAttempts = 8;
             var intervalMs = 10000;
 
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
                 .then(function(result) {
                     var resp = result.response || result;
                     var txnDetails = resp && resp.transaction_details ? resp.transaction_details : null;
@@ -16040,7 +16041,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Fetching...';
             document.getElementById('scTokUcResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay('scTokUc', result);
@@ -16074,7 +16075,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Fetching...';
             document.getElementById('scTokGpiResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay('scTokGpi', result);
@@ -16116,7 +16117,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Deleting...';
             document.getElementById('scTokDelResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scTokDel', result); })
                 .catch(function(err) { document.getElementById('scTokDelStatusBadge').className = 'sm-status-badge error'; document.getElementById('scTokDelStatusBadge').textContent = 'Failed'; document.getElementById('scTokDelResponseView').textContent = 'Error: ' + err.message; });
@@ -16142,7 +16143,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Deleting...';
             document.getElementById('scM2DelResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scM2Del', result); })
                 .catch(function(err) { document.getElementById('scM2DelStatusBadge').className = 'sm-status-badge error'; document.getElementById('scM2DelStatusBadge').textContent = 'Failed'; document.getElementById('scM2DelResponseView').textContent = 'Error: ' + err.message; });
@@ -16228,7 +16229,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Fetching...';
             document.getElementById('scM3UcResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay('scM3Uc', result);
@@ -16267,7 +16268,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Fetching...';
             document.getElementById('scM3PucResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) {
                     smCardGenericDisplay('scM3Puc', result);
@@ -16316,7 +16317,7 @@ nodeCartDetailsUsage +
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Saving...';
             document.getElementById('scM3SpiResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scM3Spi', result); })
                 .catch(function(err) { document.getElementById('scM3SpiStatusBadge').className = 'sm-status-badge error'; document.getElementById('scM3SpiStatusBadge').textContent = 'Failed'; document.getElementById('scM3SpiResponseView').textContent = 'Error: ' + err.message; });
@@ -16337,7 +16338,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending';
             badge.innerHTML = '<span class="sm-loading-spinner"></span> Verifying...';
             document.getElementById('scM3VerifyResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
     
                 .then(function(result) { smCardGenericDisplay('scM3Verify', result); smRenderVerifyStatus('scM3Verify', result); })
                 .catch(function(err) { document.getElementById('scM3VerifyStatusBadge').className = 'sm-status-badge error'; document.getElementById('scM3VerifyStatusBadge').textContent = 'Failed'; document.getElementById('scM3VerifyResponseView').textContent = 'Error: ' + err.message; });
@@ -16413,7 +16414,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending...';
             document.getElementById('scM2FtResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM2Ft',result);
                     if (result.response && result.response.metaData) {
@@ -16516,7 +16517,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending...';
             document.getElementById('scM3FtResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM3Ft',result);
                     if (result.response && result.response.metaData) {
@@ -16578,7 +16579,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending...';
             document.getElementById('scM3RptResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM3Rpt',result);
                     if (result.response) {
@@ -16726,7 +16727,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Sending...';
             document.getElementById('scM3NtResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'payment',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM3Nt',result);
                     if (result.response) {
@@ -16761,7 +16762,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Fetching...';
             document.getElementById('scM3CryResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({behavior:'smooth',block:'start'});
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'postservice',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'postservice',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM3Cry',result);
                     if (result.response) {
@@ -16840,7 +16841,7 @@ nodeCartDetailsUsage +
             var badge = document.getElementById('scM3OtpStatusBadge');
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Submitting...';
             document.getElementById('scM3OtpResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'response_handler',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'response_handler',params:params})})
                 .then(function(result){
                     smCardGenericDisplay('scM3Otp',result);
                     if (result.response) {
@@ -16868,7 +16869,7 @@ nodeCartDetailsUsage +
             var badge = document.getElementById('scM3OtpStatusBadge');
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Resending...';
             document.getElementById('scM3OtpResponseView').textContent = 'Waiting...';
-            fetchWithRetry('/proxy.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'response_handler',params:params})})
+            fetchWithRetry(getProxyUrl(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:'response_handler',params:params})})
                 .then(function(result){smCardGenericDisplay('scM3Otp',result);})
                 .catch(function(err){document.getElementById('scM3OtpStatusBadge').className='sm-status-badge error';document.getElementById('scM3OtpStatusBadge').textContent='Failed';document.getElementById('scM3OtpResponseView').textContent='Error: '+err.message;});
         }
@@ -16896,7 +16897,7 @@ nodeCartDetailsUsage +
             badge.className = 'sm-status-badge pending'; badge.innerHTML = '<span class="sm-loading-spinner"></span> Updating...';
             document.getElementById('scM3EditResponseView').textContent = 'Waiting...';
             panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            fetchWithRetry('/proxy.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
+            fetchWithRetry(getProxyUrl(), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ endpoint: 'postservice', params: params }) })
                 .then(function(result) { smCardGenericDisplay('scM3Edit', result); })
                 .catch(function(err) { document.getElementById('scM3EditStatusBadge').className = 'sm-status-badge error'; document.getElementById('scM3EditStatusBadge').textContent = 'Failed'; document.getElementById('scM3EditResponseView').textContent = 'Error: ' + err.message; });
         }

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script id="checkoutPlusScript" src="https://jssdk-uat.payu.in/bolt/bolt.min.js"></script>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -16097,6 +16097,6 @@ public class PayUHash {
             </div>
         </div>
     </div>
-    <script src="/js/app.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
